@@ -1,2 +1,4 @@
 src/Traffic_Sign_Classifier.py
 data/data.zip
+data/IMG/
+data/
