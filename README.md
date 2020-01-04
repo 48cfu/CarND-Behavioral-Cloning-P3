@@ -15,13 +15,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[image1]: ./data/figure_loss.png "Loss / Epoch"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -99,8 +93,8 @@ In order to gauge how well the model was working, I split my image and steering 
 The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track. To improve the driving behavior in these cases, I collected additional driving data in order to teach the vehicle out to recover from left and right side. Additionally for each original camera image, I augmented the data by adding  also their horizontally flipped version. This came with an additional challenge:
 
 - Central camera -> flip horizontally and multiply steering angle by -1 (`model.py` line 93-97 and function `model.py -> extend()` in line 38-67)
-- Left camera -> flip horizontally and add the steering angle of the right camera multiplied by -1 (`model.py` line 105-106 and function `model.py -> extend()` in line 38-67)
-- Right camera -> flip horizontally and add the steering angle of the left camera multiplied by -1(`model.py` line 109-110 and function `model.py -> extend()` in line 38-67)
+- Left camera -> flip horizontally and add the steering angle of the right camera (same as that of the central camera plus a correction factor) multiplied by -1 (`model.py` line 105-106 and function `model.py -> extend()` in line 38-67)
+- Right camera -> flip horizontally and add the steering angle of the left camera (same as that of the central camera plus a correction factor) multiplied by -1(`model.py` line 109-110 and function `model.py -> extend()` in line 38-67)
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
@@ -113,28 +107,17 @@ The final model architecture (`model.py` lines 146-164) is given the the table i
 To capture good driving behavior, I started with the initial provided data and added some recovering from the sides behavior.
 
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover if it find itself close to the borders. An example can be seen in the final video.
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
-
-Then I repeated this process on track two in order to get more data points.
-
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
-
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+After the collection process, I had X number of data points. I then preprocessed this data by using a generator to train the model.
 
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by
 simulations and visible in the following figure
+
+![alt text][image1]
 
 I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
