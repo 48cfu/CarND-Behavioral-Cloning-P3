@@ -29,6 +29,7 @@ My project includes the following files:
 * `src/model.py` containing the script to create and train the model
 * `src/drive.py` for driving the car in autonomous mode
 * `data/model.h5` containing a trained convolution neural network 
+* `data/output_video_2.mp4` containing the video of the final simulation
 * `README.md` summarizing the results
 
 #### 2. Submission includes functional code
@@ -62,7 +63,7 @@ My model consists of a five convolution neural network with 5x5 filter sizes and
 | FULLY CONNECT LAYER	| output dimension = 100 					                |                           |
 | FULLY CONNECT LAYER	| output dimension = 50 					                |                           |
 | FULLY CONNECT LAYER	| output dimension = 10 					                |                           |
-| OUTPUT            	| output dimension = 1			    		                |                           |
+| OUTPUT            	| output dimension = 1			    	                    |                           |
 
 #### 2. Attempts to reduce overfitting in the model
 
