@@ -110,9 +110,6 @@ To capture good driving behavior, I started with the initial provided data and a
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover if it find itself close to the borders. An example can be seen in the final video.
 
-After the collection process, I had X number of data points. I then preprocessed this data by using a generator to train the model.
-
-
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by
